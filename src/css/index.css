@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-roboto: "Roboto", sans-serif;
+}
+
+:root {
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  font-family: "Roboto", sans-serif;
+}
+
+.fade {
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.show {
+  opacity: 1;
+  transition: opacity 0.15s;
+}
