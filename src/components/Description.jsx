@@ -1,8 +1,7 @@
 export default function Description(props) {
-
-    return (
-        <div id="" class="m-5 text-center">
-            {props.children}
+    return <>
+        <div id="" className="m-5 text-center">
+            {props.value}
         </div>
-    )
+    </>
 }

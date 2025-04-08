@@ -1,9 +1,8 @@
 export default function Button(props) {
-    return(
-        <button class="block bg-sky-400 py-1 px-3 mt-1 mx-auto rounded-md text-sm text-black uppercase hover:bg-sky-600 hover:text-white active:bg-sky-700"
-                onClick={props.onSelect}
-        >
-            {props.children}
+    return <>
+        <button className="block bg-lime-400 py-1 px-3 mt-1 mx-auto rounded-md text-xs text-black uppercase hover:bg-lime-600 hover:text-white active:bg-lime-700"
+                onClick={props.onSelect} >
+            {props.value}
         </button>
-    )
+    </>
 }
