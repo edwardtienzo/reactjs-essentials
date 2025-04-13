@@ -15,9 +15,54 @@
 .fade {
   opacity: 0;
   transition: opacity 0.15s;
+  transition-timing-function: ease;
 }
 
 .show {
   opacity: 1;
   transition: opacity 0.15s;
+  transition-timing-function: ease;
+}
+
+.title {
+  animation-name: fade-out-in;
+  animation-timing-function: ease;
+  animation-duration: 1s;
+}
+
+@keyframes fade-out-in {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  70% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.title-desc {
+  animation-name: titleDesc;
+  animation-timing-function: ease;
+  animation-duration: 1s;
+  animation-delay: 0.5s;
+}
+
+@keyframes titleDesc {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

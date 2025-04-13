@@ -5,42 +5,71 @@ import Button from './Button.jsx'
 import Description from './Description.jsx'
 import Footer from './Footer.jsx'
 
-export default function App() {
-    const [selectedSubject, setSelectedDesc ] = useState('Please choose an asset');
+import assets from '../data/data.js'
+import crops from '../data/crops.js'
 
-    const assets = [
-    [ 'Raw Material', 'wheat', 'corn'],
-    [ 'Feed Mill', 'chicken feed', 'cow feed', 'pig feed']
-    ];
+export default function App() {
+    const [selectedSubject, setSelectedDesc] = useState('');
+    const [isTrue, setIsTrue] = useState(false);
 
     let assetList = "";
     let arr = [];
 
-    for (let i = 0; i < assets.length; i++) {     
-         
+    let item = {
+        name: "",
+        url: "",
+        type: "",
+        sell: 0,
+    };
+
+    for (let i = 0; i < assets.length; i++) {  
+        let temp = i * 1000;
+        
         for (let j = 0; j < assets[i].length; j++) {
-            if (j === 0 )
-                arr.push(<div className='mt-5'>{assets[i][j]}</div>);
+            if (j === 0 ) {
+                arr.push(<div className='mt-5' key={temp}>{assets[i][j]}</div>);
+            }
             else
-                arr.push(<Button onSelect={()=>clickHandler(assets[i][j])} value={assets[i][j]} />);
+                arr.push(<Button onSelect={()=>clickHandler(assets[i][j])} value={assets[i][j]} key={temp+(j*100)} isDisabled={isTrue}/>);
         }
-        assetList = <div className ="flex-1/10 flex-col text-center border-r-1">{arr}</div>
+        assetList = <div className ="flex-1/5 flex-col text-center border-r-1">{arr}</div>
     }
 
     let str = selectedSubject.toUpperCase();
 
+    function handleData() {
+        for (let i = 0; i < crops.length; i++) {
+            if(crops[i].name == str) {
+                item.name = crops[i].name;
+                item.url = crops[i].url;
+                item.type = crops[i].type;
+                item.sell = crops[i].sell;
+                break;
+            }
+        }
+    }
+    handleData();
+
+    
+
     function clickHandler(selectedButton) {
-        var desc = document.getElementById('desc');
-        
-        desc.classList.remove('show');
-        desc.classList.add('fade');
+        let title = document.getElementById("desc")
+        let desc = document.getElementById("title-desc");
+
+        desc.classList.add('title-desc');
+        setIsTrue(true);
+
+        title.classList.add('title');
 
         setTimeout(()=>{
-            desc.classList.remove('fade');
-            desc.classList.add('show');
             setSelectedDesc(selectedButton);
-        }, 150);
+        }, 500);
 
+        setTimeout(()=>{
+            title.classList.remove('title');
+            desc.classList.remove('title-desc');
+            setIsTrue(false);
+        }, 1500)
     }
 
     return (
@@ -48,12 +77,8 @@ export default function App() {
             <Header />
             <div className="flex h-170 border-b-1">
                 {assetList}
-                    {/* <div className ="flex-1/10 flex-col text-center border-r-1 pt-5">
-                        <Button onSelect={() => clickHandler('wheat')} value="wheat" />
-                        <Button onSelect={() => clickHandler('corn')} value="corn" />
-                    </div> */}
-                <div id="desc" className="flex-9/10">
-                    <Description value={str}/>
+                <div id="desc" className="flex-4/5">
+                    <Description value={item}/>
                 </div>
             </div>
             <Footer />
